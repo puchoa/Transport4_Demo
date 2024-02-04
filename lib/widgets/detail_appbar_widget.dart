@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:transparent_image/transparent_image.dart';
 import 'dart:developer' as developer;
 
+import 'package:transport4_demo_app/common.dart';
+
 class DetailAppBar extends StatefulWidget {
   final String title;
   final String imageUrl;
@@ -31,7 +33,7 @@ class _DetailAppBarState extends State<DetailAppBar> {
               decoration: const BoxDecoration(color: Colors.white),
               child: Center(
                   child: Text(
-                widget.title,
+                formatText(widget.title),
                 style:
                     const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 overflow: TextOverflow.ellipsis,
