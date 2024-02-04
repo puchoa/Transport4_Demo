@@ -9,6 +9,9 @@ class WebRecipeProvider extends ChangeNotifier {
   List<Hit> _originalRecipes = [];
   List<Hit> get originalRecipes => _originalRecipes;
 
+  List<int> _filterIndex = [];
+  List<int> get filterIndex => _filterIndex;
+
   List<Hit> _searchRecipes = [];
   List<Hit> get searchRecipes => _searchRecipes;
 
@@ -19,7 +22,13 @@ class WebRecipeProvider extends ChangeNotifier {
     List<Hit> load = await RecipeService().getRecipes();
 
     _originalRecipes = _searchRecipes = load;
+    generateIndex();
     setTags();
+  }
+
+  generateIndex() {
+    _filterIndex = List.generate(_originalRecipes.length, (index) => index);
+    notifyListeners();
   }
 
   deleteAllTags(int index) {
@@ -54,6 +63,7 @@ class WebRecipeProvider extends ChangeNotifier {
 
   resetWebRecipes() {
     _searchRecipes = _originalRecipes;
+    generateIndex();
 
     developer.log(
       "searchRecipes has been reset",
@@ -64,8 +74,18 @@ class WebRecipeProvider extends ChangeNotifier {
   }
 
   filterSearch({required String searchValue}) {
+    _filterIndex = originalRecipes
+        .asMap()
+        .entries
+        .where((entry) => entry.value.recipe.label
+            .toLowerCase()
+            .contains(searchValue.toLowerCase()))
+        .map((entry) => entry.key)
+        .toList();
+
     _searchRecipes = originalRecipes
-        .where((item) => item.recipe.label.toLowerCase().contains(searchValue))
+        .where((item) =>
+            item.recipe.label.toLowerCase().contains(searchValue.toLowerCase()))
         .toList();
 
     developer.log(
@@ -76,6 +96,14 @@ class WebRecipeProvider extends ChangeNotifier {
   }
 
   filterTags({required int index}) {
+    _filterIndex = originalRecipes
+        .asMap()
+        .entries
+        .where((entry) =>
+            entry.value.recipe.tags.contains(_showTags.elementAt(index)))
+        .map((entry) => entry.key)
+        .toList();
+
     _searchRecipes = _originalRecipes
         .where((item) => item.recipe.tags.contains(_showTags.elementAt(index)))
         .toList();
@@ -89,9 +117,9 @@ class WebRecipeProvider extends ChangeNotifier {
 
   setTags() {
     _showTags.clear();
-    for (int i = 0; i < _searchRecipes.length; ++i) {
-      for (int j = 0; j < _searchRecipes[i].recipe.tags.length; ++j) {
-        _showTags.add(_searchRecipes[i].recipe.tags[j]);
+    for (int i = 0; i < _originalRecipes.length; ++i) {
+      for (int j = 0; j < _originalRecipes[i].recipe.tags.length; ++j) {
+        _showTags.add(_originalRecipes[i].recipe.tags[j]);
       }
     }
 

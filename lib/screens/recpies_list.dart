@@ -91,8 +91,8 @@ class _RecipesListState extends State<RecipesList> {
       child: ListView.builder(
           padding: EdgeInsets.zero,
           itemCount: widget.isWeb
-              ? webRecipe.searchRecipes.length
-              : myRecipe.searchRecipes.length,
+              ? webRecipe.filterIndex.length
+              : myRecipe.filterIndex.length,
           itemBuilder: (context, index) {
             return GestureDetector(
                 onTap: () {
@@ -100,19 +100,18 @@ class _RecipesListState extends State<RecipesList> {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (builder) => RecipeDetails(
                               isWeb: widget.isWeb,
-                              index: index,
+                              index: webRecipe.filterIndex[index],
                             )));
                   } else {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (builder) => RecipeDetails(
-                              index: index,
+                              index: myRecipe.filterIndex[index],
                             )));
                   }
                 },
                 child: RecipePreview(
                     imageUrl: widget.isWeb
-                        ? webRecipe
-                            .originalRecipes[index].recipe.images.small.url
+                        ? webRecipe.searchRecipes[index].recipe.images.small.url
                         : myRecipe.searchRecipes[index].recipe.images.small.url,
                     title: widget.isWeb
                         ? formatText(
