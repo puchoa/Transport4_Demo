@@ -5,13 +5,14 @@ import 'package:transport4_demo_app/providers/web_recipe_provider.dart';
 
 class AddItems extends StatefulWidget {
   final String title;
-
+  final bool isGrocery;
   final bool isWeb;
   final bool isTags;
   final int index;
   final List<String> items;
   const AddItems(
       {super.key,
+      required this.isGrocery,
       required this.isWeb,
       required this.title,
       required this.isTags,
@@ -57,8 +58,7 @@ class _AddItemsState extends State<AddItems> {
                 webRecipesRead.replaceIngredients(widget.index, currentItems);
               }
             } else {
-              if (widget.isTags) {
-              } else {}
+              //TODO: complete statement
             }
           },
         ),

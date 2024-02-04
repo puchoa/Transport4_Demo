@@ -3,7 +3,7 @@ import 'package:transport4_demo_app/models/ingredients_model.dart';
 class Grocery {
   String title;
   List<ShoppingCart> ingredients;
-  List<String?> tags;
+  List<String> tags;
   String imageUrl;
   bool fromWeb;
   double cookTime;

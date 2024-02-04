@@ -44,6 +44,7 @@ class _EmptyListState extends State<EmptyList> {
                     onPressed: () async {
                       await Navigator.of(context).push(MaterialPageRoute(
                           builder: (builder) => AddItems(
+                                isGrocery: false,
                                 index: widget.index,
                                 isTags: widget.isTags,
                                 isWeb: widget.isWeb,

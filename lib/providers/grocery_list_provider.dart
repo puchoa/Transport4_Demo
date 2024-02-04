@@ -14,4 +14,14 @@ class GroceryListProvider extends ChangeNotifier {
     groceryList.removeAt(index);
     notifyListeners();
   }
+
+  List<String> allTags() {
+    Set<String> setTags = {};
+    for (var item in _groceryList) {
+      for (var tags in item.tags) {
+        setTags.add(tags);
+      }
+    }
+    return setTags.toList();
+  }
 }

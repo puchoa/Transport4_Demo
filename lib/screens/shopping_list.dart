@@ -5,6 +5,8 @@ import 'package:transport4_demo_app/common.dart';
 import 'package:transport4_demo_app/models/grocery_model.dart';
 import 'package:transport4_demo_app/models/ingredients_model.dart';
 import 'package:transport4_demo_app/providers/grocery_list_provider.dart';
+import 'package:transport4_demo_app/screens/add_items.dart';
+import 'package:transport4_demo_app/widgets/item_builder_widget.dart';
 import 'package:uuid/uuid.dart';
 
 class ShoppingList extends StatefulWidget {
@@ -12,9 +14,13 @@ class ShoppingList extends StatefulWidget {
   final List<ShoppingCart>? items;
   final bool newCart;
   final bool allIngredients;
+  final List<String> tags;
+  final int index;
   const ShoppingList(
       {super.key,
       required this.title,
+      required this.tags,
+      required this.index,
       this.items,
       this.newCart = false,
       this.allIngredients = false});
@@ -41,60 +47,7 @@ class _ShoppingListState extends State<ShoppingList> {
     final myGrocery = context.watch<GroceryListProvider>();
 
     return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(
-          onPressed: () {
-            if (createCart.isNotEmpty) {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: const Text("Unsaved Changes"),
-                      content: const Text(
-                          "You have unsaved changes. Are you sure you want to discard these changes and exit?"),
-                      actions: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text("Cancel")),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text("Discard Changes"))
-                      ],
-                    );
-                  });
-            } else {
-              Navigator.of(context).pop();
-            }
-          },
-        ),
-        actions: [
-          if (widget.newCart)
-            TextButton(
-                onPressed: createCart.isEmpty
-                    ? null
-                    : () {
-                        context.read<GroceryListProvider>().addGrocery(
-                            grocery: Grocery(
-                                title: updateTitle.isNotEmpty
-                                    ? updateTitle
-                                    : widget.title,
-                                ingredients: createCart,
-                                tags: [],
-                                imageUrl: "",
-                                fromWeb: false,
-                                calories: 0,
-                                servings: 0,
-                                cookTime: 0));
-                        Navigator.of(context).pop();
-                      },
-                child: const Text("Save"))
-        ],
-      ),
+      appBar: appBar(context),
       body: Column(
         children: [
           Padding(
@@ -243,6 +196,77 @@ class _ShoppingListState extends State<ShoppingList> {
               ),
             )
           : null,
+    );
+  }
+
+  AppBar appBar(BuildContext context) {
+    return AppBar(
+      leading: BackButton(
+        onPressed: () {
+          if (createCart.isNotEmpty) {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text("Unsaved Changes"),
+                    content: const Text(
+                        "You have unsaved changes. Are you sure you want to discard these changes and exit?"),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("Cancel")),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text("Discard Changes"))
+                    ],
+                  );
+                });
+          } else {
+            Navigator.of(context).pop();
+          }
+        },
+      ),
+      actions: [
+        if (widget.newCart)
+          TextButton(
+              onPressed: createCart.isEmpty
+                  ? null
+                  : () {
+                      context.read<GroceryListProvider>().addGrocery(
+                          grocery: Grocery(
+                              title: updateTitle.isNotEmpty
+                                  ? updateTitle
+                                  : widget.title,
+                              ingredients: createCart,
+                              tags: [],
+                              imageUrl: "",
+                              fromWeb: false,
+                              calories: 0,
+                              servings: 0,
+                              cookTime: 0));
+                      Navigator.of(context).pop();
+                    },
+              child: const Text("Save")),
+        if (!widget.newCart)
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (builder) => AddItems(
+                          items: widget.tags,
+                          isWeb: false,
+                          isTags: true,
+                          index: widget.index,
+                          title: "Tags",
+                          isGrocery: true,
+                        )));
+              },
+              child: const Text("Tags")),
+      ],
     );
   }
 

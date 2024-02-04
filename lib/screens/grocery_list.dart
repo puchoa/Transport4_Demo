@@ -37,8 +37,10 @@ class _GroceryListState extends State<GroceryList> {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (builder) => const ShoppingList(
+                        builder: (builder) => ShoppingList(
                           title: "All Ingredients",
+                          tags: myGrocery.allTags(),
+                          index: -1,
                         ),
                       ));
                     },
@@ -90,6 +92,8 @@ class _GroceryListState extends State<GroceryList> {
                   builder: (builder) => ShoppingList(
                     title: myGrocery.groceryList[inverseIndex].title,
                     items: myGrocery.groceryList[inverseIndex].ingredients,
+                    tags: myGrocery.groceryList[inverseIndex].tags,
+                    index: inverseIndex,
                   ),
                 ));
               },
@@ -124,6 +128,8 @@ class _GroceryListState extends State<GroceryList> {
                   title: "New List",
                   newCart: true,
                   items: [],
+                  tags: [],
+                  index: -1,
                   allIngredients: true,
                 ),
               ));

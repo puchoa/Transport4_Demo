@@ -8,10 +8,12 @@ class ItemBuilder extends StatefulWidget {
   final bool isWeb;
   final bool isTags;
   final int index;
+  final bool isGrocery;
   const ItemBuilder(
       {super.key,
       required this.isWeb,
       required this.isTags,
+      required this.isGrocery,
       required this.index});
 
   @override
@@ -78,6 +80,7 @@ class _ItemBuilderState extends State<ItemBuilder> {
                       onPressed: () async {
                         await Navigator.of(context).push(MaterialPageRoute(
                             builder: (builder) => AddItems(
+                                  isGrocery: false,
                                   index: widget.index,
                                   isTags: widget.isTags,
                                   isWeb: widget.isWeb,

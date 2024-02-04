@@ -181,7 +181,12 @@ class _RecipeDetailsState extends State<RecipeDetails> {
             !widget.isWeb &&
                 myRecipes.originalRecipes[widget.index].recipe.ingredientLines
                     .isNotEmpty) ...[
-          ItemBuilder(isWeb: widget.isWeb, isTags: false, index: widget.index),
+          ItemBuilder(
+            isWeb: widget.isWeb,
+            isTags: false,
+            index: widget.index,
+            isGrocery: false,
+          ),
           SliverToBoxAdapter(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -242,7 +247,12 @@ class _RecipeDetailsState extends State<RecipeDetails> {
             !widget.isWeb &&
                 myRecipes.originalRecipes[widget.index].recipe.ingredientLines
                     .isEmpty)
-          ItemBuilder(isWeb: widget.isWeb, isTags: true, index: widget.index),
+          ItemBuilder(
+            isWeb: widget.isWeb,
+            isTags: true,
+            index: widget.index,
+            isGrocery: false,
+          ),
         if (widget.isWeb &&
                 webRecipes.originalRecipes[widget.index].recipe.tags.isEmpty ||
             !widget.isWeb &&

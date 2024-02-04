@@ -377,6 +377,7 @@ class _CreateRecipeState extends State<CreateRecipe> {
                           List<String> items = await Navigator.of(context)
                               .push(MaterialPageRoute(
                                   builder: (builder) => AddItems(
+                                        isGrocery: false,
                                         isWeb: false,
                                         isTags: false,
                                         title: title,
