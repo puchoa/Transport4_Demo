@@ -6,7 +6,6 @@ import 'package:transport4_demo_app/models/grocery_model.dart';
 import 'package:transport4_demo_app/models/ingredients_model.dart';
 import 'package:transport4_demo_app/providers/grocery_list_provider.dart';
 import 'package:transport4_demo_app/screens/add_items.dart';
-import 'package:transport4_demo_app/widgets/item_builder_widget.dart';
 import 'package:uuid/uuid.dart';
 
 class ShoppingList extends StatefulWidget {
@@ -134,6 +133,7 @@ class _ShoppingListState extends State<ShoppingList> {
               child: Container(
                 decoration: BoxDecoration(color: Colors.grey.shade300),
                 child: TextField(
+                  key: const Key("Shopping Textfield"),
                   controller: addItemController,
                   autofocus: floatPressed,
                   decoration: InputDecoration(
@@ -184,6 +184,7 @@ class _ShoppingListState extends State<ShoppingList> {
       ),
       floatingActionButton: !floatPressed && widget.items != null
           ? FloatingActionButton(
+              key: const Key("Shopping FloatingAction"),
               onPressed: () {
                 setState(() {
                   floatPressed = true;
@@ -201,6 +202,7 @@ class _ShoppingListState extends State<ShoppingList> {
 
   AppBar appBar(BuildContext context) {
     return AppBar(
+      key: const Key("Shopping backButton"),
       leading: BackButton(
         onPressed: () {
           if (createCart.isNotEmpty) {
@@ -234,6 +236,7 @@ class _ShoppingListState extends State<ShoppingList> {
       actions: [
         if (widget.newCart)
           TextButton(
+              key: const Key("saveButton"),
               onPressed: createCart.isEmpty
                   ? null
                   : () {
