@@ -104,10 +104,7 @@ class _RecipesListState extends State<RecipesList> {
                               index: webRecipe.filterIndex[index],
                             )));
                   } else {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (builder) => RecipeDetails(
-                              index: myRecipe.filterIndex[index],
-                            )));
+                    // TODO: my recipes need to pass to detail page
                   }
                 },
                 child: RecipePreview(

@@ -51,15 +51,16 @@ class _AddItemsState extends State<AddItems> {
           onPressed: () {
             Navigator.of(context).pop(currentItems);
 
-            if (widget.isWeb) {
-              if (widget.isTags) {
-                webRecipesRead.replaceTags(widget.index, currentItems);
-              } else {
-                webRecipesRead.replaceIngredients(widget.index, currentItems);
-              }
-            } else {
-              //TODO: complete statement
-            }
+            //TODO: statement has issue
+            // if (widget.isWeb) {
+            //   if (widget.isTags) {
+            //     webRecipesRead.replaceTags(widget.index, currentItems);
+            //   } else {
+            //     webRecipesRead.replaceIngredients(widget.index, currentItems);
+            //   }
+            // } else {
+
+            // }
           },
         ),
         title: Text(widget.title),
