@@ -49,61 +49,6 @@ class _HomeState extends State<Home> {
       ),
       child: BottomNavigationBar(
         onTap: (index) {
-          // if (index == 2 && selectedIndex != 2) {
-          //   context.read<WebRecipeProvider>().setRecipes();
-          // }
-
-          if (index == 1) {
-            // Hit hit = Hit(
-            //   recipe: Recipe(
-            //       uri: "",
-            //       label: "Test 1",
-            //       image: "",
-            //       images: Images(
-            //           thumbnail: Regular(url: "", width: 0, height: 0),
-            //           small: Regular(url: "", width: 0, height: 0),
-            //           regular: Regular(url: "", width: 0, height: 0)),
-            //       source: null,
-            //       url: "",
-            //       shareAs: "",
-            //       recipeYield: 0,
-            //       healthLabels: [],
-            //       ingredientLines: [],
-            //       ingredients: [],
-            //       calories: 0,
-            //       totalWeight: 0,
-            //       totalTime: 0,
-            //       totalNutrients: {},
-            //       totalDaily: {},
-            //       digest: [
-            //         Digest(
-            //             label: Label.ENERGY,
-            //             tag: "",
-            //             schemaOrgTag: null,
-            //             total: 10,
-            //             hasRdi: false,
-            //             daily: 0,
-            //             unit: null),
-            //         Digest(
-            //             label: Label.CARBS,
-            //             tag: "",
-            //             schemaOrgTag: null,
-            //             total: 20,
-            //             hasRdi: false,
-            //             daily: 0,
-            //             unit: null),
-            //         Digest(
-            //             label: Label.PROTEIN,
-            //             tag: "",
-            //             schemaOrgTag: null,
-            //             total: 30,
-            //             hasRdi: false,
-            //             daily: 0,
-            //             unit: null)
-            //       ]),
-            // );
-            // context.read<MyRecipeProvider>().addRecipe(hit: hit);
-          }
           setState(() {
             selectedIndex = index;
           });

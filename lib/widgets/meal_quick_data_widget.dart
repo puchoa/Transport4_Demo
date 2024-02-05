@@ -40,7 +40,6 @@ class _MealDataPreviewState extends State<MealDataPreview> {
               ],
             ),
           ),
-          // healthSection(),
         ],
       ),
     );

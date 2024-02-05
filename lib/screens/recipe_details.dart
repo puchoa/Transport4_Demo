@@ -12,14 +12,9 @@ import 'package:transport4_demo_app/widgets/item_builder_widget.dart';
 import 'package:transport4_demo_app/widgets/meal_quick_data_widget.dart';
 
 class RecipeDetails extends StatefulWidget {
-  // final Recipe recipe;
   final int index;
   final bool isWeb;
-  const RecipeDetails(
-      {super.key,
-      // required this.recipe,
-      required this.index,
-      this.isWeb = false});
+  const RecipeDetails({super.key, required this.index, this.isWeb = false});
 
   @override
   State<RecipeDetails> createState() => _RecipeDetailsState();

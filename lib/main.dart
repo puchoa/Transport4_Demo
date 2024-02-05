@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => GroceryListProvider())
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
         theme: ThemeData(
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
             backgroundColor: Colors.blueAccent,
