@@ -86,6 +86,7 @@ class _RecipesListState extends State<RecipesList> {
   RefreshIndicator refreshBuilder(
       WebRecipeProvider webRecipe, MyRecipeProvider myRecipe) {
     return RefreshIndicator(
+      color: Colors.blue,
       onRefresh: () =>
           widget.isWeb ? webRecipe.setRecipes() : Future.value(null),
       child: ListView.builder(
