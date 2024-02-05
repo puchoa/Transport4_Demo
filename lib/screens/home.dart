@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-
 import 'package:transport4_demo_app/providers/web_recipe_provider.dart';
+
 import 'package:transport4_demo_app/screens/grocery_list.dart';
 import 'package:transport4_demo_app/screens/recpies_list.dart';
 
@@ -20,11 +20,13 @@ class _HomeState extends State<Home> {
     RecipesList(isWeb: false),
     RecipesList(isWeb: true),
   ];
+
   @override
   void initState() {
     super.initState();
-
-    Provider.of<WebRecipeProvider>(context, listen: false).setRecipes();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<WebRecipeProvider>().setRecipes();
+    });
   }
 
   @override

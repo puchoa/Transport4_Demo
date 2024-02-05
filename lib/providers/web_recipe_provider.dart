@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:transport4_demo_app/models/recipe_model.dart';
 import 'package:transport4_demo_app/services/recipe_service.dart';
 import 'dart:developer' as developer;
+import 'package:http/http.dart' as http;
 
 class WebRecipeProvider extends ChangeNotifier {
   final String _log = "WebRecipeProvider";
@@ -18,8 +19,18 @@ class WebRecipeProvider extends ChangeNotifier {
   final Set _showTags = {};
   Set get showTags => _showTags;
 
+  addList({required List<Hit> items}) {
+    _originalRecipes = _searchRecipes = items;
+    generateIndex();
+    setTags();
+    notifyListeners();
+  }
+
   setRecipes() async {
-    List<Hit> load = await RecipeService().getRecipes();
+    List<Hit> load = await RecipeService(
+            api:
+                "https://api.edamam.com/api/recipes/v2?type=public&app_id=30f3b536&app_key=63b5ae380f030b8d90929b1b6db216b2&ingr=5-10&time=5-60&imageSize=LARGE&random=true")
+        .getRecipes(http.Client());
 
     _originalRecipes = _searchRecipes = load;
     generateIndex();

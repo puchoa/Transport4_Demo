@@ -3,10 +3,12 @@ import 'package:http/http.dart' as http;
 import 'dart:developer' as developer;
 
 class RecipeService {
-  Future<List<Hit>> getRecipes() async {
+  final String api;
+  RecipeService({required this.api});
+
+  Future<List<Hit>> getRecipes(http.Client client) async {
     String log = "RecipeService";
-    var url = Uri.parse(
-        "https://api.edamam.com/api/recipes/v2?type=public&app_id=30f3b536&app_key=63b5ae380f030b8d90929b1b6db216b2&ingr=5-10&time=5-60&imageSize=LARGE&random=true");
+    var url = Uri.parse(api);
 
     try {
       var response = await http.get(url).timeout(const Duration(seconds: 5));
