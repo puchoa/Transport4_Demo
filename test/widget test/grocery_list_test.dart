@@ -25,7 +25,7 @@ void main() {
   testWidgets('Create new list', (WidgetTester tester) async {
     await tester.pumpWidget(const MaterialApp(home: MyApp()));
 
-    final createButton = find.byKey(const Key("Create List Button"));
+    final createButton = find.byKey(const Key("createButton"));
     await tester.tap(createButton);
     await tester.pumpAndSettle();
 
@@ -33,12 +33,12 @@ void main() {
     expect(find.text("Save"), findsOneWidget);
 
     final floatingActionButton =
-        find.byKey(const Key("Shopping FloatingAction"));
+        find.byKey(const Key("addFloatingActionButton"));
 
     await tester.tap(floatingActionButton);
     await tester.pumpAndSettle();
 
-    final textfield = find.byKey(const Key("Shopping Textfield"));
+    final textfield = find.byKey(const Key("textfield"));
     await tester.enterText(textfield, "cheese");
     await tester.pumpAndSettle();
 

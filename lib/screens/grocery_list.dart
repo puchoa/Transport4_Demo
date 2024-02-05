@@ -137,7 +137,7 @@ class _GroceryListState extends State<GroceryList> {
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
-                key: Key("Create List Button"),
+                key: Key("createButton"),
                 "Create List",
                 style: TextStyle(color: Colors.black),
               ),

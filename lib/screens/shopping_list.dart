@@ -133,7 +133,7 @@ class _ShoppingListState extends State<ShoppingList> {
               child: Container(
                 decoration: BoxDecoration(color: Colors.grey.shade300),
                 child: TextField(
-                  key: const Key("Shopping Textfield"),
+                  key: const Key("textfield"),
                   controller: addItemController,
                   autofocus: floatPressed,
                   decoration: InputDecoration(
@@ -184,7 +184,7 @@ class _ShoppingListState extends State<ShoppingList> {
       ),
       floatingActionButton: !floatPressed && widget.items != null
           ? FloatingActionButton(
-              key: const Key("Shopping FloatingAction"),
+              key: const Key("addFloatingActionButton"),
               onPressed: () {
                 setState(() {
                   floatPressed = true;
@@ -202,8 +202,8 @@ class _ShoppingListState extends State<ShoppingList> {
 
   AppBar appBar(BuildContext context) {
     return AppBar(
-      key: const Key("Shopping backButton"),
       leading: BackButton(
+        key: const Key("backButton"),
         onPressed: () {
           if (createCart.isNotEmpty) {
             showDialog(
@@ -215,11 +215,13 @@ class _ShoppingListState extends State<ShoppingList> {
                         "You have unsaved changes. Are you sure you want to discard these changes and exit?"),
                     actions: [
                       TextButton(
+                          key: const Key("cancelButton"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
                           child: const Text("Cancel")),
                       TextButton(
+                          key: const Key("discardButton"),
                           onPressed: () {
                             Navigator.of(context).pop();
                             Navigator.of(context).pop();
