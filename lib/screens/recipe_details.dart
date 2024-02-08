@@ -27,6 +27,18 @@ class _RecipeDetailsState extends State<RecipeDetails> {
   Widget build(BuildContext context) {
     final webRecipes = context.watch<WebRecipeProvider>();
     final myRecipes = context.watch<MyRecipeProvider>();
+    final shopping = context.read<GroceryListProvider>();
+
+    bool check = false;
+
+    for (var item in shopping.groceryList) {
+      if (item.title == webRecipes.originalRecipes[widget.index].recipe.label) {
+        setState(() {
+          saved = true;
+        });
+        break;
+      }
+    }
 
     return Scaffold(
         body: CustomScrollView(
@@ -77,9 +89,6 @@ class _RecipeDetailsState extends State<RecipeDetails> {
                           ? null
                           : () {
                               if (!saved) {
-                                final shopping =
-                                    context.read<GroceryListProvider>();
-
                                 if (widget.isWeb) {
                                   shopping.addGrocery(
                                       grocery: Grocery(
